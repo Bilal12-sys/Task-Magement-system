@@ -1,6 +1,6 @@
 # Task Management System
 
-**Live demo:** [https://client-beta-eight-99.vercel.app/](#)
+**Live demo:** [https://client-beta-eight-99.vercel.app/](https://client-beta-eight-99.vercel.app/)
 
 A full-stack task management application for organizing everyday work and turning
 larger goals into practical, AI-generated plans. Create and update tasks, track
