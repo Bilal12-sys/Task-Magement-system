@@ -1,25 +1,14 @@
-# Task-Magement-system
+# Task Management System — Backend
 
-## Project Structure
+This directory contains the Express API, MongoDB models, validation, task
+services, and OpenRouter integration used by the AI planner.
 
-- `server/` — Backend application and its `package.json`.
-- `client/` — Reserved for the frontend.
-- `server/server.js` — Configures the Express app, API routes, middleware, and server startup.
-- `server/routes/` — Defines task and AI API endpoints.
-- `server/controllers/` — Handles incoming requests and sends responses.
-- `server/services/` — Contains task and AI business logic.
-- `server/models/` — Defines the MongoDB task model.
-- `server/validators/` — Validates API request data.
-- `server/middleware/` — Provides request validation and error handling.
-- `server/config/` — Configures the database connection.
-- `server/constants/` — Stores shared values such as HTTP status codes.
-- `server/test/` — Contains API tests.
+See the [repository README](../README.md) for the full project overview,
+environment variables, API reference, and setup instructions.
 
-The backend's source folders, `.env`, `.env.example`, and npm manifests are all inside `server/`.
-Run backend commands from that folder:
+Run the backend from this directory:
 
 ```sh
-cd server
 npm install
 npm run dev
 ```
