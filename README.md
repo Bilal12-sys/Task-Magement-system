@@ -120,7 +120,7 @@ Edit `.env` in the `server` directory and set:
 
 | Variable | Purpose |
 | --- | --- |
-| `PORT` | Backend port; the example uses `3000`. |
+| `PORT` | Backend port; the example uses `1000`. |
 | `MONGODB_URI` | MongoDB connection string. |
 | `OPENROUTER_API_KEY` | OpenRouter API key for AI planning. |
 | `OPENROUTER_MODEL` | Optional model slug; defaults to `google/gemini-2.5-flash`. |
@@ -147,12 +147,20 @@ npm install
 ```
 
 Set `VITE_API_URL` in `.env` in the `client` directory to the backend API base URL,
-including `/api`.
-For the example backend port, use:
+including `/api`. For local development, use:
 
 ```dotenv
 VITE_API_URL=http://localhost:1000/api
 ```
+
+When deploying the frontend to Vercel, set `VITE_API_URL` in the Vercel
+project's Environment Variables to your **publicly reachable backend URL**,
+including `/api` (for example, `https://your-backend.example.com/api`). Do not
+use `localhost` for a deployed frontend: in a visitor's browser, `localhost`
+refers to that visitor's own device. Deploy the backend to a hosting service or
+make your development server reachable through a secure tunnel. After changing
+a Vercel environment variable, redeploy the frontend for the new value to take
+effect.
 
 Start the frontend:
 
