@@ -1,0 +1,555 @@
+/* VELTRIX Futuristic SaaS Styling */
+
+:root {
+  --bg-primary: #050711;
+  --bg-secondary: #090D1B;
+  --bg-sidebar: #080C19;
+  --bg-card: #0D1325;
+  --bg-card-hover: #131B32;
+  --border-color: rgba(103, 132, 255, 0.16);
+  --border-glow: rgba(139, 92, 246, 0.3);
+  --purple-primary: #8B5CF6;
+  --purple-bright: #A855F7;
+  --blue-electric: #3B82F6;
+  --cyan-accent: #22D3EE;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --success: #22C55E;
+  --warning: #F59E0B;
+  --danger: #F43F5E;
+}
+
+/* Animations */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Floating AI Robot animation */
+@keyframes floatBot {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.float-bot {
+  animation: floatBot 4s ease-in-out infinite;
+}
+
+/* Wavy Loader Audio/Neural Equalizer Bar Animation */
+@keyframes wavyBar {
+  0%, 100% {
+    height: 10px;
+    opacity: 0.35;
+  }
+  50% {
+    height: 48px;
+    opacity: 1;
+  }
+}
+
+/* Neural aura pulse */
+@keyframes pulseAura {
+  0%, 100% {
+    transform: scale(0.95);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.6;
+  }
+}
+
+.pulse-aura {
+  animation: pulseAura 3s ease-in-out infinite;
+}
+
+/* Staggered slide in for generated plan steps */
+@keyframes stepSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.step-card-animate {
+  animation: stepSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Layout and Containers */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: var(--bg-primary);
+  position: relative;
+}
+
+.app-main-layout {
+  flex: 1;
+  margin-left: 240px;
+  width: calc(100% - 240px);
+  max-width: calc(100% - 240px);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  transition: margin-left 0.3s cubic-bezier(0.16, 1, 0.3, 1), width 0.3s cubic-bezier(0.16, 1, 0.3, 1), max-width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.app-main-layout.sidebar-collapsed {
+  margin-left: 72px;
+  width: calc(100% - 72px);
+  max-width: calc(100% - 72px);
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: var(--bg-sidebar);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  z-index: 50;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.sidebar.collapsed {
+  width: 72px !important;
+}
+
+.sidebar.collapsed .sidebar-text,
+.sidebar.collapsed .sidebar-promo,
+.sidebar.collapsed .sidebar-label {
+  display: none !important;
+}
+
+.sidebar.collapsed .sidebar-brand-wrapper {
+  justify-content: center !important;
+  padding: 24px 0 !important;
+}
+
+.sidebar.collapsed .nav-link {
+  justify-content: center !important;
+  padding: 12px !important;
+}
+
+/* Grids with strict overflow containment */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dashboard-split-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 24px;
+  align-items: start;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.ai-planner-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 24px;
+  align-items: start;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* AI Plan Interactive Small Box with Hover Scale & Glow */
+.ai-plan-box {
+  background: linear-gradient(145deg, #0D1325 0%, #090E1D 100%);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  border-radius: 16px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ai-plan-box:hover {
+  transform: scale(1.025);
+  border-color: rgba(168, 85, 247, 0.65) !important;
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.4), 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+.ai-plan-box .view-eye-btn {
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.ai-plan-box:hover .view-eye-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Interactive Card & Button Hover States */
+.stat-card {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(139, 92, 246, 0.4) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(139, 92, 246, 0.15) !important;
+}
+
+.task-item-card {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.task-item-card:hover {
+  border-color: rgba(103, 132, 255, 0.35) !important;
+  background: linear-gradient(145deg, #101830 0%, #0C1226 100%) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.icon-action-btn:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #FFFFFF !important;
+}
+
+.icon-action-btn.delete:hover {
+  background: rgba(244, 63, 94, 0.2) !important;
+  color: #FDA4AF !important;
+  border-color: rgba(244, 63, 94, 0.4) !important;
+}
+
+.create-task-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5) !important;
+}
+
+.nav-link:hover:not(.active) {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  color: #F8FAFC !important;
+}
+
+/* Form controls styling */
+input:focus, textarea:focus, select:focus {
+  border-color: #38BDF8 !important;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.25) !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #050711;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(103, 132, 255, 0.2);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.4);
+}
+
+/* =============================================
+   RESPONSIVE MEDIA QUERIES — Full Coverage
+   ============================================= */
+
+/* Desktop only: hide mobile-only elements */
+@media (min-width: 769px) {
+  .desktop-hidden {
+    display: none !important;
+  }
+  .mobile-bottom-nav {
+    display: none !important;
+  }
+}
+
+/* Large tablet & small desktop (≤1200px) */
+@media (max-width: 1200px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+  }
+}
+
+/* Tablet landscape (≤1024px) */
+@media (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  .dashboard-split-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  .ai-planner-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+
+/* Tablet portrait (≤768px) — mobile layout begins */
+@media (max-width: 768px) {
+  /* Sidebar becomes off-canvas drawer */
+  .sidebar {
+    transform: translateX(-100%);
+    z-index: 60;
+  }
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  /* Main content takes full width */
+  .app-main-layout {
+    margin-left: 0 !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+
+  /* Topbar adjustments */
+  .topbar {
+    padding: 0 16px !important;
+    height: 64px !important;
+  }
+  .topbar-search {
+    display: none !important;
+  }
+  .topbar-greeting-sub {
+    display: none !important;
+  }
+
+  /* Main page padding — room for bottom nav */
+  main {
+    padding: 18px 16px !important;
+    padding-bottom: 100px !important;
+  }
+
+  /* Mobile bottom nav visible */
+  .mobile-bottom-nav {
+    display: flex !important;
+  }
+
+  /* Stats grid — 2 cols on tablet */
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+
+  /* Single column grids */
+  .dashboard-split-grid,
+  .ai-planner-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 16px !important;
+  }
+
+  /* Task cards */
+  .task-item-card {
+    padding: 14px 16px !important;
+  }
+  .task-due-date-col {
+    display: none !important;
+  }
+
+  /* Modals full-width on mobile */
+  .modal-backdrop {
+    padding: 12px !important;
+    align-items: flex-end !important;
+  }
+  .modal-window {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 20px 20px 0 0 !important;
+    padding: 20px !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+  }
+
+  /* Topbar Create Task button — icon only on small tablets */
+  .topbar-create-label {
+    display: none !important;
+  }
+
+  /* Page headers */
+  .page-title {
+    font-size: 1.3rem !important;
+  }
+}
+
+/* Large phones (≤640px) */
+@media (max-width: 640px) {
+  main {
+    padding: 14px 12px !important;
+    padding-bottom: 100px !important;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  .stat-card {
+    padding: 14px 12px !important;
+  }
+
+  .task-item-card {
+    padding: 12px 14px !important;
+    gap: 8px !important;
+  }
+
+  /* AI planner textarea: fewer rows */
+  .ai-planner-textarea {
+    rows: 4;
+  }
+
+  /* Plan box in AI planner */
+  .ai-plan-box {
+    padding: 16px !important;
+  }
+
+  /* Topbar greeting shrink */
+  .topbar h1 {
+    font-size: 1rem !important;
+  }
+}
+
+/* Small phones (≤480px) */
+@media (max-width: 480px) {
+  main {
+    padding: 12px 10px !important;
+    padding-bottom: 100px !important;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+
+  .stat-card {
+    padding: 12px 10px !important;
+    border-radius: 12px !important;
+  }
+
+  /* Stat card value font */
+  .stat-card-value {
+    font-size: 1.6rem !important;
+  }
+
+  .task-item-card {
+    padding: 10px 12px !important;
+    gap: 6px !important;
+    border-radius: 10px !important;
+  }
+
+  /* Hide action buttons text, keep icons */
+  .task-action-text {
+    display: none !important;
+  }
+
+  /* Modals */
+  .modal-overlay > div,
+  .modal-window {
+    width: calc(100vw - 20px) !important;
+    padding: 16px !important;
+    border-radius: 14px !important;
+    max-height: 92vh !important;
+    overflow-y: auto !important;
+  }
+
+  /* Modal 3-col meta grids become 1 col */
+  .modal-meta-grid {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+
+  /* AI planner sample prompts smaller */
+  .ai-sample-btn {
+    padding: 6px 12px !important;
+    font-size: 0.75rem !important;
+  }
+
+  /* Topbar Create Task — icon-only */
+  .topbar-create-label {
+    display: none !important;
+  }
+
+  .topbar h1 {
+    font-size: 0.95rem !important;
+  }
+}
+
+/* Very small phones (≤380px) */
+@media (max-width: 380px) {
+  main {
+    padding: 10px 8px !important;
+    padding-bottom: 96px !important;
+  }
+
+  .stats-grid {
+    gap: 6px !important;
+  }
+
+  .stat-card {
+    padding: 10px 8px !important;
+  }
+
+  .task-item-card {
+    padding: 9px 10px !important;
+  }
+
+  .topbar {
+    padding: 0 10px !important;
+    height: 58px !important;
+  }
+
+  .topbar h1 {
+    font-size: 0.88rem !important;
+  }
+}

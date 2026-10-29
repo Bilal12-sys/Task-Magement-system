@@ -1,10 +1,10 @@
-import { Router } from 'express';
+import express from 'express';
 import createTaskPlan from '../controllers/ai-task/createTaskPlan.controller.js';
 import { validateBody } from '../middleware/validate.middleware.js';
 import { taskPlanSchema } from '../validators/ai.validation.js';
 
-const aiTaskRouter = Router();
+const Ai_Router = express.Router();
 
-aiTaskRouter.post('/plan-task', validateBody(taskPlanSchema), createTaskPlan);
+Ai_Router.post('/plan-task', validateBody(taskPlanSchema), createTaskPlan);
 
-export default aiTaskRouter;
+export default Ai_Router;

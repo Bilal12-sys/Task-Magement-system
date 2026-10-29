@@ -186,29 +186,52 @@ test('AI service returns the generated plan and reports provider failures', asyn
     estimatedHours: 12,
     steps: ['Plan pages', 'Build and test'],
   };
-  const client = {
-    chatCompletion: async (requestData) => {
-      assert.equal(requestData.messages[1].content, 'Build a portfolio');
-      return {
+  const mockFetch = async (url, options) => {
+    assert.equal(url, 'https://openrouter.ai/api/v1/chat/completions');
+    assert.equal(options.headers.Authorization, 'Bearer test-key');
+    const requestData = JSON.parse(options.body);
+    assert.equal(requestData.model, 'google/gemini-2.5-flash');
+    assert.equal(requestData.messages[1].content, 'Build a portfolio');
+    assert.deepEqual(requestData.response_format, { type: 'json_object' });
+    return {
+      ok: true,
+      json: async () => ({
         choices: [{ message: { content: JSON.stringify(expectedPlan) } }],
-      };
-    },
+      }),
+    };
   };
 
   assert.deepEqual(
-    await requestTaskPlan(client, 'Build a portfolio'),
+    await requestTaskPlan('test-key', 'Build a portfolio', mockFetch),
     expectedPlan,
   );
 
   await assert.rejects(
     requestTaskPlan(
-      {
-        chatCompletion: async () => {
-          throw new Error('provider details');
-        },
-      },
+      'test-key',
       'Build a portfolio',
+      async () => {
+        throw new Error('provider details');
+      },
     ),
-    { statusCode: 502, message: 'AI provider request failed' },
+    { statusCode: 502, message: 'OpenRouter provider request failed' },
+  );
+});
+
+test('AI service reports OpenRouter credit errors clearly', async () => {
+  await assert.rejects(
+    requestTaskPlan(
+      'test-key',
+      'Build a portfolio',
+      async () => ({
+        ok: false,
+        status: 402,
+        json: async () => ({ error: { message: 'Insufficient credits' } }),
+      }),
+    ),
+    {
+      statusCode: 503,
+      message: 'OpenRouter account has insufficient credits',
+    },
   );
 });
